@@ -31,6 +31,8 @@ dependencies {
 
     implementation 'com.github.horizontalsystems.unstoppable-wallet-android:core:60b777a'
     implementation 'com.github.horizontalsystems.unstoppable-wallet-android:views:60b777a'
+    implementation 'com.github.horizontalsystems:lightning-kit-android:c902464'
+    implementation files('libs/Lndmobile.aar')
 
     implementation 'com.google.android.material:material:1.1.0'
     testImplementation 'junit:junit:4.12'
