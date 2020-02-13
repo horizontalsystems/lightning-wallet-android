@@ -4,9 +4,10 @@
 
     <!--Welcome-->
 
-    <string name="Welcome_Title">Unstoppable</string>
-    <string name="Welcome_CreateWallet">Create Wallet</string>
-    <string name="Welcome_RestoreWallet">Restore Wallet</string>
-    <string name="Welcome_Version" translatable="false">version %s</string>
+    <string name="Welcome_Title">Welcome to \nLightning \nWallet</string>
+    <string name="Welcome_Description">by Horizontal Systems</string>
+    <string name="Welcome_Create">Create</string>
+    <string name="Welcome_Restore">Restore</string>
+    <string name="Welcome_Connect">Connect</string>
 
 </resources>
