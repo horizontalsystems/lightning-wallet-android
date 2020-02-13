@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="NoActionBar" parent="DarkModeAppTheme">
+    <style name="NoActionBar" parent="Theme.AppTheme.DayNight">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

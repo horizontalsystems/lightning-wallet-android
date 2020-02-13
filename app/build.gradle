@@ -28,9 +28,13 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation "androidx.preference:preference-ktx:1.1.0"
 
-    implementation 'com.github.horizontalsystems.unstoppable-wallet-android:core:60b777a'
-    implementation 'com.github.horizontalsystems.unstoppable-wallet-android:views:60b777a'
+    ext.q = 'a81df04'
+    implementation "com.github.horizontalsystems.unstoppable-wallet-android:core:$q"
+    implementation "com.github.horizontalsystems.unstoppable-wallet-android:views:$q"
+    implementation "com.github.horizontalsystems.unstoppable-wallet-android:pin:$q"
+    implementation "com.github.horizontalsystems.unstoppable-wallet-android:languageswitcher:$q"
     implementation 'com.github.horizontalsystems:lightning-kit-android:cf1e6af'
     implementation files('libs/Lndmobile.aar')
 

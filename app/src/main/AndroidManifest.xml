@@ -4,14 +4,20 @@
     package="io.horizontalsystems.lightningwallet">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+
 
     <application
+        android:name=".core.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/DarkModeAppTheme"
+        android:theme="@style/Theme.AppTheme.DayNight"
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity android:name=".modules.launcher.LauncherActivity">
