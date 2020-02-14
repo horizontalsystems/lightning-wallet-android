@@ -4,16 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import io.horizontalsystems.lightningwallet.BaseActivity
 import io.horizontalsystems.lightningwallet.R
 import io.horizontalsystems.lightningwallet.modules.home.HomeActivity
 import kotlinx.android.synthetic.main.activity_connect.*
 
-class ConnectActivity : AppCompatActivity() {
+class ConnectActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_connect)
+
+        title = getString(R.string.Remote_Connect)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         addressValue.text = "192.168.0.55:10009"
 

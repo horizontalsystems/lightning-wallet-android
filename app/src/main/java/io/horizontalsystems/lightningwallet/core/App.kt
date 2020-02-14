@@ -11,6 +11,7 @@ package io.horizontalsystems.lightningwallet.core
 import android.util.Log
 import androidx.preference.PreferenceManager
 import io.horizontalsystems.core.CoreApp
+import io.horizontalsystems.core.IAppConfigTestMode
 import io.horizontalsystems.core.ICoreApp
 import io.horizontalsystems.lightningwallet.BuildConfig
 import io.reactivex.plugins.RxJavaPlugins
@@ -92,6 +93,9 @@ class App : CoreApp() {
 
 //        val appConfig = AppConfigProvider()
 //        appConfigProvider = appConfig
+        appConfigTestMode = object : IAppConfigTestMode {
+            override val testMode: Boolean = false
+        }
 //        appConfigTestMode = appConfig
 //        languageConfigProvider = appConfig
 
