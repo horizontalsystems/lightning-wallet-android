@@ -1,7 +1,7 @@
 package io.horizontalsystems.lightningwallet
 
-import io.horizontalsystems.core.CoreApp
+import io.horizontalsystems.core.CoreActivity
 
-abstract class BaseActivity : CoreApp() {
+abstract class BaseActivity : CoreActivity() {
 
 }
