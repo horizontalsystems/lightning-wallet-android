@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
     <application
-        android:name=".core.App"
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -18,9 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppTheme.DayNight"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".modules.home.HomeActivity" />
-        <activity android:name=".modules.remote.ConnectActivity" />
-        <activity android:name=".modules.remote.RemoteActivity" />
+
         <activity android:name=".modules.launcher.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,9 +26,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".modules.welcome.WelcomeActivity"
-            android:screenOrientation="portrait" />
+
+        <activity android:name=".modules.welcome.WelcomeActivity" />
+        <activity android:name=".modules.home.HomeActivity" />
+        <activity android:name=".modules.remote.ConnectActivity" />
+        <activity android:name=".modules.remote.RemoteActivity" />
     </application>
 
 </manifest>
