@@ -40,6 +40,7 @@ dependencies {
     implementation "com.github.horizontalsystems.unstoppable-wallet-android:core:$modulesVersion"
     implementation "com.github.horizontalsystems.unstoppable-wallet-android:views:$modulesVersion"
     implementation "com.github.horizontalsystems.unstoppable-wallet-android:pin:$modulesVersion"
+    implementation "com.github.horizontalsystems.unstoppable-wallet-android:icons:$modulesVersion"
     implementation "com.github.horizontalsystems.unstoppable-wallet-android:languageswitcher:$modulesVersion"
     implementation 'com.github.horizontalsystems:lightning-kit-android:cf1e6af'
     implementation files('libs/Lndmobile.aar')
