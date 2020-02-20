@@ -20,4 +20,27 @@
     <string name="Main_Receive">Receive</string>
     <string name="Main_Send">Send</string>
 
+    <!--Settings-->
+
+    <string name="Settings_Title">Settings</string>
+    <string name="Settings_SecurityCenter">Security Center</string>
+    <string name="Settings_Notifications">Notifications</string>
+    <string name="Settings_ManageCoins">Manage Coins</string>
+    <string name="Settings_ExperimentalFeatures">Experimental</string>
+    <string name="Settings_RestoreWallet">Restore Wallet</string>
+    <string name="Settings_BaseCurrency">Base Currency</string>
+    <string name="Settings_Language">Language</string>
+    <string name="Settings_LightMode">Light Mode</string>
+    <string name="Settings_About">About</string>
+    <string name="Settings_ShareThisWallet">Tell Friends</string>
+    <string name="Settings_InfoTitleWithVersion" translatable="false">Lightning %s</string>
+    <string name="Settings_InfoSubtitle" translatable="false">decentralized app</string>
+    <string name="Settings_Report">Contact</string>
+
+    <!--Setting_Tell Friends-->
+
+    <string name="SettingsShare_Title">Share</string>
+    <string name="SettingsShare_Text">Unstoppable Wallet - a crypto wallet I recommend</string>
+    <string name="title_activity_main_settings">MainSettingsActivity</string>
+
 </resources>

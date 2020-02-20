@@ -3,8 +3,13 @@ package io.horizontalsystems.lightningwallet
 import android.util.Log
 import androidx.preference.PreferenceManager
 import io.horizontalsystems.core.CoreApp
-import io.horizontalsystems.core.IAppConfigTestMode
 import io.horizontalsystems.core.ICoreApp
+import io.horizontalsystems.lightningwallet.managers.CurrencyManager
+import io.horizontalsystems.lightningwallet.managers.LanguageManager
+import io.horizontalsystems.lightningwallet.managers.SystemInfoManager
+import io.horizontalsystems.lightningwallet.storage.AppConfigProvider
+import io.horizontalsystems.lightningwallet.storage.LocalStorage
+import io.horizontalsystems.lightningwallet.storage.ThemeStorage
 import io.reactivex.plugins.RxJavaPlugins
 import java.util.logging.Level
 import java.util.logging.Logger
@@ -12,6 +17,8 @@ import java.util.logging.Logger
 class App : CoreApp() {
 
     companion object : ICoreApp by CoreApp {
+        lateinit var localStorage: ILocalStorage
+        lateinit var appConfigProvider: IAppConfigProvider
     }
 
     override fun onCreate() {
@@ -29,8 +36,16 @@ class App : CoreApp() {
         instance = this
         preferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
 
-        appConfigTestMode = object : IAppConfigTestMode {
-            override val testMode: Boolean = false
+        AppConfigProvider().apply {
+            appConfigProvider = this
+            appConfigTestMode = this
+            languageConfigProvider = this
         }
+
+        localStorage = LocalStorage(preferences)
+        themeStorage = ThemeStorage()
+        languageManager = LanguageManager()
+        currencyManager = CurrencyManager(appConfigProvider, localStorage)
+        systemInfoManager = SystemInfoManager()
     }
 }

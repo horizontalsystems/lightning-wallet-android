@@ -1,5 +1,6 @@
 package io.horizontalsystems.lightningwallet.modules.home
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModel
@@ -25,6 +26,11 @@ object HomeModule {
         val intent = Intent(context, HomeActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
         context.startActivity(intent)
+    }
+
+    fun startAsNewTask(context: Activity) {
+        start(context)
+        context.overridePendingTransition(0, 0)
     }
 
     class Factory : ViewModelProvider.Factory {
