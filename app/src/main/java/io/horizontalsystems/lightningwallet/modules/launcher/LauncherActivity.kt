@@ -1,11 +1,13 @@
 package io.horizontalsystems.lightningwallet.modules.launcher
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import io.horizontalsystems.lightningwallet.modules.home.HomeModule
 import io.horizontalsystems.lightningwallet.modules.welcome.WelcomeModule
+import io.horizontalsystems.pin.PinModule
 
 class LauncherActivity : AppCompatActivity() {
 
@@ -34,7 +36,7 @@ class LauncherActivity : AppCompatActivity() {
         })
 
         router.openUnlockModule.observe(this, Observer {
-            // LockScreenModule.startForUnlock(this, REQUEST_CODE_UNLOCK_PIN)
+            PinModule.startForUnlock(this, REQUEST_CODE_UNLOCK_PIN)
         })
 
         router.openNoSystemLockModule.observe(this, Observer {
@@ -52,5 +54,19 @@ class LauncherActivity : AppCompatActivity() {
         router.closeApplication.observe(this, Observer {
             finishAffinity()
         })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_UNLOCK_PIN) {
+            when (resultCode) {
+                PinModule.RESULT_OK -> presenter.didUnlock()
+                PinModule.RESULT_CANCELLED -> presenter.didCancelUnlock()
+            }
+        }
+    }
+
+    companion object {
+        const val REQUEST_CODE_UNLOCK_PIN = 1
     }
 }

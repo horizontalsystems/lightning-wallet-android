@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import io.horizontalsystems.lightningwallet.App
 
 object LaunchModule {
 
@@ -46,7 +47,7 @@ object LaunchModule {
     class Factory : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             val router = LaunchRouter()
-            val interactor = LaunchInteractor()
+            val interactor = LaunchInteractor(App.pinManager, App.systemInfoManager, App.keyStoreManager)
             val presenter = LaunchPresenter(router, interactor)
 
             interactor.delegate = presenter

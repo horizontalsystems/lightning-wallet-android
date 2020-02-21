@@ -6,10 +6,7 @@ import io.horizontalsystems.core.CoreApp
 import io.horizontalsystems.core.ICoreApp
 import io.horizontalsystems.core.security.EncryptionManager
 import io.horizontalsystems.core.security.KeyStoreManager
-import io.horizontalsystems.lightningwallet.managers.CurrencyManager
-import io.horizontalsystems.lightningwallet.managers.KeyStoreCleaner
-import io.horizontalsystems.lightningwallet.managers.LanguageManager
-import io.horizontalsystems.lightningwallet.managers.SystemInfoManager
+import io.horizontalsystems.lightningwallet.managers.*
 import io.horizontalsystems.lightningwallet.storage.AppConfigProvider
 import io.horizontalsystems.lightningwallet.storage.LocalStorage
 import io.horizontalsystems.lightningwallet.storage.ThemeStorage
@@ -24,6 +21,9 @@ class App : CoreApp() {
     companion object : ICoreApp by CoreApp {
         lateinit var localStorage: ILocalStorage
         lateinit var appConfigProvider: IAppConfigProvider
+        lateinit var backgroundManager: BackgroundManager
+
+        var lastExitDate: Long = 0
     }
 
     override fun onCreate() {
@@ -47,11 +47,17 @@ class App : CoreApp() {
             languageConfigProvider = this
         }
 
-        localStorage = LocalStorage(preferences)
+        LocalStorage(preferences).apply {
+            localStorage = this
+            pinStorage = this
+        }
+
         themeStorage = ThemeStorage()
         languageManager = LanguageManager()
         currencyManager = CurrencyManager(appConfigProvider, localStorage)
+
         systemInfoManager = SystemInfoManager()
+        backgroundManager = BackgroundManager(this)
 
         KeyStoreManager("MASTER_KEY", KeyStoreCleaner(localStorage)).apply {
             keyStoreManager = this
@@ -61,5 +67,10 @@ class App : CoreApp() {
         encryptionManager = EncryptionManager(keyProvider)
         secureStorage = SecureStorage(encryptionManager)
         pinManager = PinManager(secureStorage)
+
+        LockManager(pinManager).apply {
+            lockManager = this
+            backgroundManager.registerListener(this)
+        }
     }
 }
