@@ -7,18 +7,19 @@ import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import io.horizontalsystems.core.CoreActivity
 import io.horizontalsystems.core.CoreApp
 import io.horizontalsystems.currencyswitcher.CurrencySwitcherModule
 import io.horizontalsystems.languageswitcher.LanguageSettingsActivity
 import io.horizontalsystems.languageswitcher.LanguageSwitcherModule
+import io.horizontalsystems.lightningwallet.BaseActivity
 import io.horizontalsystems.lightningwallet.BuildConfig
 import io.horizontalsystems.lightningwallet.R
 import io.horizontalsystems.lightningwallet.helpers.ModuleCode
 import io.horizontalsystems.lightningwallet.modules.home.HomeModule
+import io.horizontalsystems.lightningwallet.modules.settings.security.SecuritySettingsModule
 import kotlinx.android.synthetic.main.activity_main_settings.*
 
-class MainSettingsActivity : CoreActivity() {
+class MainSettingsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -142,7 +143,7 @@ class MainSettingsActivity : CoreActivity() {
         })
 
         router.showSecuritySettingsLiveEvent.observe(this, Observer {
-            // SecuritySettingsModule.start(it)
+            SecuritySettingsModule.start(this)
         })
 
         router.openLinkLiveEvent.observe(this, Observer { link ->

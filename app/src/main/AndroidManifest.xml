@@ -32,8 +32,10 @@
         <activity android:name=".modules.home.HomeActivity" />
         <activity android:name=".modules.remote.ConnectActivity" />
         <activity android:name=".modules.remote.RemoteActivity" />
+        <activity android:name=".modules.settings.security.SecuritySettingsActivity" />
         <activity android:name="io.horizontalsystems.currencyswitcher.CurrencySwitcherActivity" />
         <activity android:name="io.horizontalsystems.languageswitcher.LanguageSettingsActivity" />
+        <activity android:name="io.horizontalsystems.pin.PinActivity" />
 
     </application>
 

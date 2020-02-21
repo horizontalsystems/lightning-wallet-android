@@ -4,12 +4,17 @@ import android.util.Log
 import androidx.preference.PreferenceManager
 import io.horizontalsystems.core.CoreApp
 import io.horizontalsystems.core.ICoreApp
+import io.horizontalsystems.core.security.EncryptionManager
+import io.horizontalsystems.core.security.KeyStoreManager
 import io.horizontalsystems.lightningwallet.managers.CurrencyManager
+import io.horizontalsystems.lightningwallet.managers.KeyStoreCleaner
 import io.horizontalsystems.lightningwallet.managers.LanguageManager
 import io.horizontalsystems.lightningwallet.managers.SystemInfoManager
 import io.horizontalsystems.lightningwallet.storage.AppConfigProvider
 import io.horizontalsystems.lightningwallet.storage.LocalStorage
 import io.horizontalsystems.lightningwallet.storage.ThemeStorage
+import io.horizontalsystems.pin.core.PinManager
+import io.horizontalsystems.pin.core.SecureStorage
 import io.reactivex.plugins.RxJavaPlugins
 import java.util.logging.Level
 import java.util.logging.Logger
@@ -47,5 +52,14 @@ class App : CoreApp() {
         languageManager = LanguageManager()
         currencyManager = CurrencyManager(appConfigProvider, localStorage)
         systemInfoManager = SystemInfoManager()
+
+        KeyStoreManager("MASTER_KEY", KeyStoreCleaner(localStorage)).apply {
+            keyStoreManager = this
+            keyProvider = this
+        }
+
+        encryptionManager = EncryptionManager(keyProvider)
+        secureStorage = SecureStorage(encryptionManager)
+        pinManager = PinManager(secureStorage)
     }
 }

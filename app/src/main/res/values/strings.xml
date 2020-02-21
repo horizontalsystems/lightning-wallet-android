@@ -43,4 +43,15 @@
     <string name="SettingsShare_Text">Unstoppable Wallet - a crypto wallet I recommend</string>
     <string name="title_activity_main_settings">MainSettingsActivity</string>
 
+    <!--Setting_Security-->
+
+    <string name="SettingsSecurity_Fingerprint">Fingerprint</string>
+    <string name="SettingsSecurity_EnablePin">Passcode</string>
+    <string name="SettingsSecurity_EditPin">Edit Passcode</string>
+    <string name="SettingsSecurity_ManageKeys">Manage Wallets</string>
+    <string name="SettingsSecurity_BackupWallet">Backup Wallet</string>
+    <string name="SettingsSecurity_BlockchainSettings">Blockchain Settings</string>
+    <string name="SettingsSecurity_EnableTor">Enable Tor</string>
+    <string name="SettingsSecurity_TorConnectionDescription">Tor can safeguard your browsing activities on wallet. Allow permission for using tor browser in settings.</string>
+
 </resources>
