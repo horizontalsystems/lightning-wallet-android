@@ -2,6 +2,11 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+def computeVersionCode() {
+    ext.buildNumber = System.getenv("BUILD_NUMBER") ?: 1
+    return "$buildNumber".toInteger()
+}
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -10,7 +15,7 @@ android {
         applicationId "io.horizontalsystems.lightningwallet"
         minSdkVersion 26
         targetSdkVersion 29
-        versionCode 1
+        versionCode computeVersionCode()
         versionName "1.0"
     }
 
