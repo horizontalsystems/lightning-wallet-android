@@ -10,16 +10,14 @@ class LaunchPresenter(val router: LaunchModule.IRouter, private val interactor: 
     //  IViewDelegate methods
 
     override fun viewDidLoad() {
-        router.openWelcomeModule()
-
-        // when {
-        //     interactor.isSystemLockOff -> router.openNoSystemLockModule()
-        //     interactor.isKeyInvalidated -> router.openKeyInvalidatedModule()
-        //     interactor.isUserNotAuthenticated -> router.openUserAuthenticationModule()
-        //     interactor.isAccountsEmpty -> router.openWelcomeModule()
-        //     interactor.isPinNotSet -> router.openMainModule()
-        //     else -> router.openUnlockModule()
-        // }
+        when {
+            interactor.isSystemLockOff -> router.openNoSystemLockModule()
+            interactor.isKeyInvalidated -> router.openKeyInvalidatedModule()
+            interactor.isUserNotAuthenticated -> router.openUserAuthenticationModule()
+            interactor.isAccountsEmpty -> router.openWelcomeModule()
+            interactor.isPinNotSet -> router.openMainModule()
+            else -> router.openUnlockModule()
+        }
     }
 
     override fun didUnlock() {

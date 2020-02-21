@@ -29,6 +29,7 @@
 
         <activity android:name=".modules.settings.MainSettingsActivity" />
         <activity android:name=".modules.welcome.WelcomeActivity" />
+        <activity android:name=".modules.keystore.KeyStoreActivity" />
         <activity android:name=".modules.home.HomeActivity" />
         <activity android:name=".modules.remote.ConnectActivity" />
         <activity android:name=".modules.remote.RemoteActivity" />

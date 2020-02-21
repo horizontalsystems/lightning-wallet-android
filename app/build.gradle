@@ -36,12 +36,13 @@ dependencies {
     implementation "androidx.preference:preference-ktx:1.1.0"
 
     implementation "androidx.biometric:biometric:1.0.1"
-    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.google.code.gson:gson:2.8.6'
 
-    def modulesVersion = '77b3bbb'
+    def modulesVersion = '6da2b10'
 
     implementation "com.github.horizontalsystems.unstoppable-wallet-android:core:$modulesVersion"
     implementation "com.github.horizontalsystems.unstoppable-wallet-android:views:$modulesVersion"
+    implementation "com.github.horizontalsystems.unstoppable-wallet-android:keystore:$modulesVersion"
     implementation "com.github.horizontalsystems.unstoppable-wallet-android:pin:$modulesVersion"
     implementation "com.github.horizontalsystems.unstoppable-wallet-android:icons:$modulesVersion"
     implementation "com.github.horizontalsystems.unstoppable-wallet-android:languageswitcher:$modulesVersion"
