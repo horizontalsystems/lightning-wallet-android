@@ -3,25 +3,34 @@ package io.horizontalsystems.lightningwallet.modules.nodecredentials
 import android.Manifest
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
+import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.google.zxing.MultiFormatReader
-import com.google.zxing.ResultPoint
 import com.google.zxing.client.android.DecodeFormatManager
 import com.google.zxing.client.android.DecodeHintManager
 import com.google.zxing.client.android.Intents
 import com.journeyapps.barcodescanner.BarcodeCallback
-import com.journeyapps.barcodescanner.BarcodeResult
 import com.journeyapps.barcodescanner.DefaultDecoderFactory
 import com.journeyapps.barcodescanner.camera.CameraSettings
 import io.horizontalsystems.lightningwallet.R
+import io.horizontalsystems.lightningwallet.modules.remote.ConnectActivity
 import kotlinx.android.synthetic.main.activity_qr_scanner.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
 
 class NodeCredentialsActivity : AppCompatActivity() {
+
+    private lateinit var presenter: NodeCredentialsPresenter
+    private val callback: BarcodeCallback = BarcodeCallback { result ->
+        barcodeView.pause()
+        presenter.onScan(result.text)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,9 +45,55 @@ class NodeCredentialsActivity : AppCompatActivity() {
         window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         window.decorView.systemUiVisibility = 0
 
+        presenter = ViewModelProvider(this, NodeCredentialsModule.Factory()).get(NodeCredentialsPresenter::class.java)
+        presenter.viewDidLoad()
+
+        observeEvents()
+
         initializeFromIntent(intent)
 
-        barcodeView.decodeSingle(callback)
+        buttonPaste.setOnClickListener {
+            presenter.onPaste()
+        }
+
+        barcodeView.decodeContinuous(callback)
+    }
+
+    private fun observeEvents() {
+        (presenter.view as NodeCredentialsView).startScanner.observe(this, Observer {
+            openCameraWithPermission()
+        })
+
+        (presenter.view as NodeCredentialsView).showDescription.observe(this, Observer {
+            errorTxt.visibility = View.INVISIBLE
+            descriptionTxt.visibility = View.VISIBLE
+        })
+
+        (presenter.view as NodeCredentialsView).emptyClipboardError.observe(this, Observer {
+            descriptionTxt.visibility = View.INVISIBLE
+            errorTxt.setText(R.string.NodeCredentials_EmptyClipboardError)
+            errorTxt.visibility = View.VISIBLE
+            resetErrorWithDelay()
+        })
+
+        (presenter.view as NodeCredentialsView).invalidAddressError.observe(this, Observer {
+            descriptionTxt.visibility = View.INVISIBLE
+            errorTxt.setText(R.string.NodeCredentials_InvalidAddressError)
+            errorTxt.visibility = View.VISIBLE
+            resetErrorWithDelay()
+        })
+
+        (presenter.router as NodeCredentialsRouter).openConnectNode.observe(this, Observer { remoteLndCredentials ->
+            val intent = Intent(this, ConnectActivity::class.java)
+            startActivity(intent)
+        })
+    }
+
+    private fun resetErrorWithDelay() {
+        //reset after 3 seconds
+        Handler().postDelayed({
+            presenter.resetInput()
+        }, 3 * 1000)
     }
 
     override fun onResume() {
@@ -71,26 +126,13 @@ class NodeCredentialsActivity : AppCompatActivity() {
         return result
     }
 
-    private val callback: BarcodeCallback = object : BarcodeCallback {
-        override fun barcodeResult(result: BarcodeResult) {
-            barcodeView.pause()
-            Log.e("QrCodeScanner", "res: ${result.text}")
-        }
-
-        override fun possibleResultPoints(resultPoints: List<ResultPoint>) {
-            resultPoints.forEach {
-                Log.e("QrCodeScanner", "res: $it")
-            }
-        }
-    }
-
     @AfterPermissionGranted(REQUEST_CAMERA_PERMISSION)
     private fun openCameraWithPermission() {
         val perms = arrayOf(Manifest.permission.CAMERA)
         if (EasyPermissions.hasPermissions(this, *perms)) {
             barcodeView.resume()
         } else {
-            EasyPermissions.requestPermissions(this, "Please grant the camera permission", REQUEST_CAMERA_PERMISSION, *perms)
+            EasyPermissions.requestPermissions(this, getString(R.string.NodeCredentials_PleaseGrantCameraPermission), REQUEST_CAMERA_PERMISSION, *perms)
         }
     }
 
