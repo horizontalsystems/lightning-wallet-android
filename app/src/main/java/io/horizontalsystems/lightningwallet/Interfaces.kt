@@ -17,3 +17,8 @@ interface ILocalStorage {
 
     fun clear()
 }
+
+interface IClipboardManager {
+    fun copyText(text: String)
+    fun getCopiedText(): String
+}
