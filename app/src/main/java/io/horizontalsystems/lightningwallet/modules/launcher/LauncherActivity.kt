@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import io.horizontalsystems.lightningwallet.modules.home.HomeModule
+import io.horizontalsystems.lightningwallet.modules.main.MainModule
 import io.horizontalsystems.lightningwallet.modules.keystore.KeyStoreActivity
 import io.horizontalsystems.lightningwallet.modules.welcome.WelcomeModule
 import io.horizontalsystems.pin.PinModule
@@ -32,7 +32,7 @@ class LauncherActivity : AppCompatActivity() {
         })
 
         router.openMainModule.observe(this, Observer {
-            HomeModule.start(this)
+            MainModule.start(this)
             finish()
         })
 

@@ -1,4 +1,4 @@
-package io.horizontalsystems.lightningwallet.modules.home
+package io.horizontalsystems.lightningwallet.modules.main
 
 import android.os.Bundle
 import io.horizontalsystems.lightningwallet.BaseActivity
@@ -7,7 +7,7 @@ import io.horizontalsystems.lightningwallet.modules.settings.MainSettingsModule
 import io.horizontalsystems.views.TopMenuItem
 import kotlinx.android.synthetic.main.activity_home.*
 
-class HomeActivity : BaseActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

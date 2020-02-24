@@ -30,7 +30,7 @@
         <activity android:name=".modules.settings.MainSettingsActivity" />
         <activity android:name=".modules.welcome.WelcomeActivity" />
         <activity android:name=".modules.keystore.KeyStoreActivity" />
-        <activity android:name=".modules.home.HomeActivity" />
+        <activity android:name=".modules.main.MainActivity" />
         <activity android:name=".modules.nodeconnect.NodeConnectActivity" />
         <activity android:name=".modules.nodecredentials.NodeCredentialsActivity"/>
         <activity android:name=".modules.settings.security.SecuritySettingsActivity" />

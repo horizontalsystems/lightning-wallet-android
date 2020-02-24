@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".modules.home.HomeActivity">
+    tools:context=".modules.main.MainActivity">
 
     <io.horizontalsystems.views.ShadowlessToolbarView
         android:id="@+id/shadowlessToolbar"
