@@ -57,7 +57,7 @@ dependencies {
     implementation "com.github.horizontalsystems.unstoppable-wallet-android:icons:$modulesVersion"
     implementation "com.github.horizontalsystems.unstoppable-wallet-android:languageswitcher:$modulesVersion"
     implementation "com.github.horizontalsystems.unstoppable-wallet-android:currencyswitcher:$modulesVersion"
-    implementation 'com.github.horizontalsystems:lightning-kit-android:cf1e6af'
+    implementation "com.github.horizontalsystems:lightning-kit-android:3a55b1b"
     implementation files('libs/Lndmobile.aar')
 
     implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
