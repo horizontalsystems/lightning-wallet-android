@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import io.horizontalsystems.lightningkit.remote.RemoteLndCredentials
+import io.horizontalsystems.lightningwallet.App
 
 object NodeConnectModule {
 
@@ -47,7 +48,7 @@ object NodeConnectModule {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             val view = NodeConnectView()
             val router = NodeConnectRouter()
-            val interactor = NodeConnectInteractor()
+            val interactor = NodeConnectInteractor(App.walletManager)
 
             val presenter = NodeConnectPresenter(view, router, interactor, credentials).apply {
                 interactor.delegate = this
