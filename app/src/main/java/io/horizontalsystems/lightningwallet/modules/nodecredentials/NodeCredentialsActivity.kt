@@ -17,7 +17,7 @@ import com.journeyapps.barcodescanner.BarcodeCallback
 import com.journeyapps.barcodescanner.DefaultDecoderFactory
 import com.journeyapps.barcodescanner.camera.CameraSettings
 import io.horizontalsystems.lightningwallet.R
-import io.horizontalsystems.lightningwallet.modules.remote.ConnectActivity
+import io.horizontalsystems.lightningwallet.modules.nodeconnect.NodeConnectModule
 import kotlinx.android.synthetic.main.activity_qr_scanner.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
@@ -60,32 +60,34 @@ class NodeCredentialsActivity : AppCompatActivity() {
     }
 
     private fun observeEvents() {
-        (presenter.view as NodeCredentialsView).startScanner.observe(this, Observer {
+        val view = presenter.view as NodeCredentialsView
+        val router = presenter.router as NodeCredentialsRouter
+
+        view.startScanner.observe(this, Observer {
             openCameraWithPermission()
         })
 
-        (presenter.view as NodeCredentialsView).showDescription.observe(this, Observer {
+        view.showDescription.observe(this, Observer {
             errorTxt.visibility = View.INVISIBLE
             descriptionTxt.visibility = View.VISIBLE
         })
 
-        (presenter.view as NodeCredentialsView).emptyClipboardError.observe(this, Observer {
+        view.emptyClipboardError.observe(this, Observer {
             descriptionTxt.visibility = View.INVISIBLE
             errorTxt.setText(R.string.NodeCredentials_EmptyClipboardError)
             errorTxt.visibility = View.VISIBLE
             resetErrorWithDelay()
         })
 
-        (presenter.view as NodeCredentialsView).invalidAddressError.observe(this, Observer {
+        view.invalidAddressError.observe(this, Observer {
             descriptionTxt.visibility = View.INVISIBLE
             errorTxt.setText(R.string.NodeCredentials_InvalidAddressError)
             errorTxt.visibility = View.VISIBLE
             resetErrorWithDelay()
         })
 
-        (presenter.router as NodeCredentialsRouter).openConnectNode.observe(this, Observer { remoteLndCredentials ->
-            val intent = Intent(this, ConnectActivity::class.java)
-            startActivity(intent)
+        router.openConnectNode.observe(this, Observer { credentials ->
+            NodeConnectModule.start(this, credentials)
         })
     }
 
@@ -142,8 +144,7 @@ class NodeCredentialsActivity : AppCompatActivity() {
         val decodeHints = DecodeHintManager.parseDecodeHints(intent)
         val settings = CameraSettings()
         if (intent.hasExtra(Intents.Scan.CAMERA_ID)) {
-            val cameraId =
-                intent.getIntExtra(Intents.Scan.CAMERA_ID, -1)
+            val cameraId = intent.getIntExtra(Intents.Scan.CAMERA_ID, -1)
             if (cameraId >= 0) {
                 settings.requestedCameraId = cameraId
             }
@@ -163,7 +164,7 @@ class NodeCredentialsActivity : AppCompatActivity() {
         )
     }
 
-    companion object{
+    companion object {
         private const val REQUEST_CAMERA_PERMISSION = 1
     }
 
