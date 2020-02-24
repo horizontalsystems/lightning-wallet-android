@@ -32,7 +32,6 @@
         <activity android:name=".modules.keystore.KeyStoreActivity" />
         <activity android:name=".modules.home.HomeActivity" />
         <activity android:name=".modules.nodeconnect.NodeConnectActivity" />
-        <activity android:name=".modules.remote.RemoteActivity" />
         <activity android:name=".modules.nodecredentials.NodeCredentialsActivity"/>
         <activity android:name=".modules.settings.security.SecuritySettingsActivity" />
         <activity android:name="io.horizontalsystems.currencyswitcher.CurrencySwitcherActivity" />
