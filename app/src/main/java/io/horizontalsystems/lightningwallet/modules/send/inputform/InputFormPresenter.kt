@@ -5,11 +5,12 @@ import androidx.lifecycle.ViewModel
 class InputFormPresenter(
     val view: InputFormModule.IView,
     val router: InputFormModule.IRouter,
-    private val interactor: InputFormModule.IInteractor
+    private val interactor: InputFormModule.IInteractor,
+    private val address: String
 ) : ViewModel(), InputFormModule.IViewDelegate {
 
     override fun viewDidLoad() {
-//        view.showDescription()
+        view.setAddress(address)
     }
 
 }

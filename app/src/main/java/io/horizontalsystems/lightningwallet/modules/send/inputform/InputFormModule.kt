@@ -10,6 +10,7 @@ object InputFormModule {
 
     interface IView {
         fun startScanner()
+        fun setAddress(address: String)
     }
 
     interface IViewDelegate {
@@ -31,13 +32,13 @@ object InputFormModule {
         context.startActivity(intent)
     }
 
-    class Factory : ViewModelProvider.Factory {
+    class Factory(private val address: String) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             val router = InputFormRouter()
             val view = InputFormView()
             val interactor = InputFormInteractor()
-            val presenter = InputFormPresenter(view, router, interactor)
+            val presenter = InputFormPresenter(view, router, interactor, address)
 
             return presenter as T
         }

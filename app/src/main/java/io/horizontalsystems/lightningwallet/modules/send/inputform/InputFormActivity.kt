@@ -1,6 +1,7 @@
 package io.horizontalsystems.lightningwallet.modules.send.inputform
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import io.horizontalsystems.lightningwallet.BaseActivity
 import io.horizontalsystems.lightningwallet.R
@@ -16,24 +17,29 @@ class InputFormActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_send_form)
 
+        val address = intent.getStringExtra(AddressKey) ?: run {
+            finish()
+            return
+        }
+
         shadowlessToolbar.bind(
             getString(R.string.Send_Title, "BTC"),
             leftBtnItem = TopMenuItem(R.drawable.ic_lightning),
             rightBtnItem = TopMenuItem(text = R.string.Send_Close, onClick = { onBackPressed() })
         )
 
-        presenter = ViewModelProvider(this, InputFormModule.Factory()).get(InputFormPresenter::class.java)
-//        presenter.viewDidLoad()
+        presenter = ViewModelProvider(this, InputFormModule.Factory(address)).get(InputFormPresenter::class.java)
+        presenter.viewDidLoad()
 
         observeEvents()
     }
 
     private fun observeEvents() {
+        val view = presenter.view as InputFormView
 
-//        (presenter.view as SendView).showDescription.observe(this, Observer {
-//            errorTxt.visibility = View.INVISIBLE
-//            descriptionTxt.visibility = View.VISIBLE
-//        })
+        view.addressValue.observe(this, Observer {
+            addressInput.setText(it)
+        })
 
     }
 
