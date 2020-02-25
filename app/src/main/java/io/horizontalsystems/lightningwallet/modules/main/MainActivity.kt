@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProvider
 import io.horizontalsystems.lightningwallet.BaseActivity
 import io.horizontalsystems.lightningwallet.R
 import io.horizontalsystems.lightningwallet.modules.settings.MainSettingsModule
-import io.horizontalsystems.views.TopMenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -20,23 +19,11 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
-        setActionBar()
 
         presenter.onLoad()
 
         observeEvents()
-    }
-
-    private fun setActionBar() {
-        val leftBtn = TopMenuItem(R.drawable.ic_share, onClick = {
-            onBackPressed()
-        })
-
-        val rightBtn = TopMenuItem(R.drawable.settings, onClick = {
-            MainSettingsModule.start(this)
-        })
-
-        shadowlessToolbar.bind(null, leftBtnItem = leftBtn, rightBtnItem = rightBtn)
+        observeActions()
     }
 
     private fun observeEvents() {
@@ -54,5 +41,14 @@ class MainActivity : BaseActivity() {
         view.hideSyncingText.observe(this, Observer {
             syncingText.visibility = View.GONE
         })
+    }
+
+    private fun observeActions() {
+        channels.setOnClickListener {
+        }
+
+        settings.setOnClickListener {
+            MainSettingsModule.start(this)
+        }
     }
 }
