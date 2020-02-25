@@ -15,7 +15,7 @@ import io.horizontalsystems.lightningwallet.BaseActivity
 import io.horizontalsystems.lightningwallet.BuildConfig
 import io.horizontalsystems.lightningwallet.R
 import io.horizontalsystems.lightningwallet.helpers.ModuleCode
-import io.horizontalsystems.lightningwallet.modules.home.HomeModule
+import io.horizontalsystems.lightningwallet.modules.main.MainModule
 import io.horizontalsystems.lightningwallet.modules.settings.security.SecuritySettingsModule
 import kotlinx.android.synthetic.main.activity_main_settings.*
 
@@ -41,7 +41,7 @@ class MainSettingsActivity : BaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == ModuleCode.LANGUAGE_SWITCH && resultCode == LanguageSwitcherModule.LANGUAGE_CHANGED) {
-            HomeModule.startAsNewTask(this)
+            MainModule.startAsNewTask(this)
         }
     }
 

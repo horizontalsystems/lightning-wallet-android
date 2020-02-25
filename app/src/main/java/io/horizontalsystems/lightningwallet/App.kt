@@ -10,6 +10,7 @@ import io.horizontalsystems.lightningwallet.managers.*
 import io.horizontalsystems.lightningwallet.storage.AppConfigProvider
 import io.horizontalsystems.lightningwallet.storage.LocalStorage
 import io.horizontalsystems.lightningwallet.storage.ThemeStorage
+import io.horizontalsystems.lightningwallet.storage.WalletStorage
 import io.horizontalsystems.pin.core.PinManager
 import io.horizontalsystems.pin.core.SecureStorage
 import io.reactivex.plugins.RxJavaPlugins
@@ -22,6 +23,8 @@ class App : CoreApp() {
         lateinit var localStorage: ILocalStorage
         lateinit var appConfigProvider: IAppConfigProvider
         lateinit var backgroundManager: BackgroundManager
+        lateinit var walletManager: WalletManager
+        lateinit var lightningKitManager: LightningKitManager
 
         var lastExitDate: Long = 0
     }
@@ -68,9 +71,16 @@ class App : CoreApp() {
         secureStorage = SecureStorage(encryptionManager)
         pinManager = PinManager(secureStorage)
 
+        val walletStorage = WalletStorage(preferences)
+
+        lightningKitManager = LightningKitManager()
+        walletManager = WalletManager(walletStorage, lightningKitManager)
+
         LockManager(pinManager).apply {
             lockManager = this
             backgroundManager.registerListener(this)
         }
+
+        walletManager.bootstrapStoredWallet()
     }
 }

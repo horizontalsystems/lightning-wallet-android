@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import io.horizontalsystems.lightningwallet.BaseActivity
 import io.horizontalsystems.lightningwallet.R
-import io.horizontalsystems.lightningwallet.modules.home.HomeModule
+import io.horizontalsystems.lightningwallet.modules.main.MainModule
 import io.horizontalsystems.pin.PinModule
 import io.horizontalsystems.views.TopMenuItem
 import kotlinx.android.synthetic.main.activity_settings_security.*
@@ -80,7 +80,7 @@ class SecuritySettingsActivity : BaseActivity() {
 
         viewModel.restartApp.observe(this, Observer {
             finishAffinity()
-            HomeModule.startAsNewTask(this)
+            MainModule.startAsNewTask(this)
             SecuritySettingsModule.start(this)
             exitProcess(0)
         })

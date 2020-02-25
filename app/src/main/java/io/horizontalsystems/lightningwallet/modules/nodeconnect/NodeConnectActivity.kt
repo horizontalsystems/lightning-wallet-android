@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import io.horizontalsystems.lightningkit.remote.RemoteLndCredentials
 import io.horizontalsystems.lightningwallet.BaseActivity
 import io.horizontalsystems.lightningwallet.R
-import io.horizontalsystems.lightningwallet.modules.home.HomeModule
+import io.horizontalsystems.lightningwallet.modules.main.MainModule
 import kotlinx.android.synthetic.main.activity_connect.*
 
 class NodeConnectActivity : BaseActivity() {
@@ -59,7 +59,7 @@ class NodeConnectActivity : BaseActivity() {
         })
 
         router.openMainModule.observe(this, Observer {
-            HomeModule.start(this)
+            MainModule.start(this)
         })
     }
 
