@@ -16,7 +16,7 @@
     <string name="Remote_Address">Address</string>
 
     <!--Main-->
-    <string name="Main_TotalBalance">Total Balance</string>
+    <string name="Main_TotalBalanceTitle">Total Balance</string>
     <string name="Main_Receive">Receive</string>
     <string name="Main_Send">Send</string>
 

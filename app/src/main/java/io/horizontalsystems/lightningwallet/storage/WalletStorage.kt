@@ -19,7 +19,7 @@ class WalletStorage(private val preferences: SharedPreferences) {
             val json = gson.fromJson(data, JsonObject::class.java)
 
             val credentials = json.get("credentials")
-            val connection = if (credentials == null) {
+            val connection = if (credentials != null) {
                 gson.fromJson(data, LightningConnection.Remote::class.java)
             } else {
                 LightningConnection.Local

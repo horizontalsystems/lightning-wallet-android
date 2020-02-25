@@ -81,5 +81,6 @@ class App : CoreApp() {
             backgroundManager.registerListener(this)
         }
 
+        walletManager.bootstrapStoredWallet()
     }
 }
