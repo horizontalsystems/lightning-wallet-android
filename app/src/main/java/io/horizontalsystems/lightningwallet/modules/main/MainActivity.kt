@@ -8,7 +8,7 @@ import io.horizontalsystems.lightningwallet.BaseActivity
 import io.horizontalsystems.lightningwallet.R
 import io.horizontalsystems.lightningwallet.modules.settings.MainSettingsModule
 import io.horizontalsystems.views.TopMenuItem
-import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
 
@@ -19,7 +19,7 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.activity_main)
         setActionBar()
 
         presenter.onLoad()
