@@ -49,13 +49,13 @@
         android:gravity="center"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
-        android:text="@string/NodeCredentials_Description"
         android:textColor="@color/white"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/topBox"
         app:layout_constraintEnd_toEndOf="@+id/topBox"
         app:layout_constraintStart_toStartOf="@+id/topBox"
-        app:layout_constraintTop_toTopOf="@+id/topBox" />
+        app:layout_constraintTop_toTopOf="@+id/topBox"
+        tools:text="@string/NodeCredentials_Description" />
 
     <TextView
         android:id="@+id/errorTxt"

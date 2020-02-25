@@ -27,6 +27,10 @@
     <string name="NodeCredentials_PleaseGrantCameraPermission">Please grant the camera permission</string>
 
 
+    <!--Send-->
+    <string name="Send_Title">Send %s</string>
+    <string name="Send_Close">Close</string>
+
     <!--Settings-->
 
     <string name="Settings_Title">Settings</string>

@@ -45,6 +45,7 @@ object LaunchModule {
     }
 
     class Factory : ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             val router = LaunchRouter()
             val interactor = LaunchInteractor(App.walletManager, App.pinManager, App.systemInfoManager, App.keyStoreManager)

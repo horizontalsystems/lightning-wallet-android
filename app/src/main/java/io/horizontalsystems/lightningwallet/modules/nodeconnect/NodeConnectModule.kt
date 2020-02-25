@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import io.horizontalsystems.core.putParcelableExtra
 import io.horizontalsystems.lightningkit.remote.RemoteLndCredentials
 import io.horizontalsystems.lightningwallet.App
 
@@ -37,14 +38,14 @@ object NodeConnectModule {
 
     fun start(context: Context, credentials: RemoteLndCredentials) {
         val intent = Intent(context, NodeConnectActivity::class.java).apply {
-            putExtra("credentials", credentials)
+            putParcelableExtra("credentials", credentials)
         }
 
         context.startActivity(intent)
     }
 
     class Factory(private val credentials: RemoteLndCredentials) : ViewModelProvider.Factory {
-
+        @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             val view = NodeConnectView()
             val router = NodeConnectRouter()

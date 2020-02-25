@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import android.view.WindowManager
 import com.google.zxing.MultiFormatReader
 import com.google.zxing.client.android.DecodeFormatManager
@@ -16,11 +17,15 @@ import kotlinx.android.synthetic.main.activity_qr_scanner.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
+
 abstract class QrScanActivity: BaseActivity() {
 
     private val callback = BarcodeCallback {
         barcodeView.pause()
-        onScan(it.text)
+        //slow down fast transition to new window
+        Handler().postDelayed({
+            onScan(it.text)
+        }, 1000)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,7 +84,7 @@ abstract class QrScanActivity: BaseActivity() {
         }
     }
 
-    protected fun resetErrorWithDelay() {
+    private fun resetErrorWithDelay() {
         //reset after 3 seconds
         Handler().postDelayed({
             resetInput()
@@ -87,6 +92,19 @@ abstract class QrScanActivity: BaseActivity() {
     }
 
     abstract fun resetInput()
+
+    protected fun showDescription(descriptionText: Int) {
+        errorTxt.visibility = View.INVISIBLE
+        descriptionTxt.setText(descriptionText)
+        descriptionTxt.visibility = View.VISIBLE
+    }
+
+    protected fun showError(errorText: Int) {
+        descriptionTxt.visibility = View.INVISIBLE
+        errorTxt.setText(errorText)
+        errorTxt.visibility = View.VISIBLE
+        resetErrorWithDelay()
+    }
 
     private fun initializeFromIntent(intent: Intent) {
         // Scan the formats the intent requested, and return the result to the calling activity.

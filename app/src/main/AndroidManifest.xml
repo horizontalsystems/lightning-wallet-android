@@ -32,11 +32,15 @@
         <activity android:name=".modules.keystore.KeyStoreActivity" />
         <activity android:name=".modules.main.MainActivity" />
         <activity android:name=".modules.nodeconnect.NodeConnectActivity" />
-        <activity android:name=".modules.nodecredentials.NodeCredentialsActivity"/>
+        <activity android:name=".modules.nodecredentials.NodeCredentialsActivity" />
         <activity android:name=".modules.settings.security.SecuritySettingsActivity" />
         <activity android:name="io.horizontalsystems.currencyswitcher.CurrencySwitcherActivity" />
         <activity android:name="io.horizontalsystems.languageswitcher.LanguageSettingsActivity" />
         <activity android:name="io.horizontalsystems.pin.PinActivity" />
+        <activity android:name=".modules.send.scanaddress.ScanAddressActivity" />
+        <activity
+            android:name=".modules.send.inputform.InputFormActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
 
     </application>
 

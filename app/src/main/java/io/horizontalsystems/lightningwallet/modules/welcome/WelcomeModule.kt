@@ -26,6 +26,7 @@ object WelcomeModule : ViewModelProvider.Factory {
         context.startActivity(intent)
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         val interactor = WelcomeInteractor()
         val presenter = WelcomePresenter(interactor)
