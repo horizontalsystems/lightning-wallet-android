@@ -37,6 +37,7 @@
         <activity android:name="io.horizontalsystems.currencyswitcher.CurrencySwitcherActivity" />
         <activity android:name="io.horizontalsystems.languageswitcher.LanguageSettingsActivity" />
         <activity android:name="io.horizontalsystems.pin.PinActivity" />
+        <activity android:name="io.horizontalsystems.lightningwallet.modules.channels.ChannelsActivity" />
         <activity android:name=".modules.send.scanaddress.ScanAddressActivity" />
         <activity
             android:name=".modules.send.inputform.InputFormActivity"

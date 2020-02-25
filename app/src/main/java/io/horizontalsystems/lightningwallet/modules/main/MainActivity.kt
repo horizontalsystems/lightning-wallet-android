@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import io.horizontalsystems.lightningwallet.BaseActivity
 import io.horizontalsystems.lightningwallet.R
+import io.horizontalsystems.lightningwallet.modules.channels.ChannelsModule
 import io.horizontalsystems.lightningwallet.modules.settings.MainSettingsModule
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -45,6 +46,7 @@ class MainActivity : BaseActivity() {
 
     private fun observeActions() {
         channels.setOnClickListener {
+            ChannelsModule.start(this)
         }
 
         settings.setOnClickListener {
