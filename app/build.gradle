@@ -7,6 +7,10 @@ def computeVersionCode() {
     return "$buildNumber".toInteger()
 }
 
+androidExtensions {
+    experimental = true
+}
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"

@@ -97,5 +97,10 @@
 
     <string name="Channels_Open">Open</string>
     <string name="Channels_Closed">Closed</string>
+    <string name="Channels_CanSent">Can sent</string>
+    <string name="Channels_CanReceive">Can Receive</string>
+    <string name="Channels_NewChannel">New Channel</string>
+    <string name="Channels_Manage">Manage</string>
+    <string name="Channels_Info">Info</string>
 
 </resources>

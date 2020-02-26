@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="13dp"
+    android:layout_marginEnd="13dp"
+    android:background="?CoinItemBackground"
+    android:paddingStart="3dp"
+    android:paddingEnd="3dp"
+    android:paddingBottom="8dp">
+
+    <!-- first line -->
+
+    <ImageView
+        android:id="@+id/coinBackgroundSquare"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/coin_icon_square"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <io.horizontalsystems.views.IconView
+        android:id="@+id/iconCoin"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/coinBackgroundSquare"
+        app:layout_constraintEnd_toEndOf="@+id/coinBackgroundSquare"
+        app:layout_constraintStart_toStartOf="@+id/coinBackgroundSquare"
+        app:layout_constraintTop_toTopOf="@+id/coinBackgroundSquare" />
+
+    <ImageView
+        android:id="@+id/iconNotSynced"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/grey"
+        android:indeterminateTintMode="src_atop"
+        android:src="@drawable/ic_attention"
+        android:tint="?ColorLucian"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/coinBackgroundSquare"
+        app:layout_constraintEnd_toEndOf="@+id/coinBackgroundSquare"
+        app:layout_constraintStart_toStartOf="@+id/coinBackgroundSquare"
+        app:layout_constraintTop_toTopOf="@+id/coinBackgroundSquare" />
+
+    <TextView
+        android:id="@+id/channelId"
+        style="@style/Headline2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:ellipsize="end"
+        android:includeFontPadding="false"
+        android:paddingStart="0dp"
+        android:paddingEnd="12dp"
+        android:singleLine="true"
+        android:textColor="?BallanceCoinNameColor"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@+id/coinBackgroundSquare"
+        app:layout_constraintTop_toTopOf="@+id/coinBackgroundSquare"
+        tools:text="ID: 61989915824023148768 jhasjkhajkshdkajs kjahsdkjasd " />
+
+    <TextView
+        android:id="@+id/channelState"
+        style="@style/Subhead2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:includeFontPadding="false"
+        android:textColor="@color/grey"
+        app:layout_constraintStart_toStartOf="@+id/channelId"
+        app:layout_constraintTop_toBottomOf="@+id/channelId"
+        tools:text="Open" />
+
+    <View
+        android:id="@+id/border"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/steel_20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coinBackgroundSquare" />
+
+    <!-- Second Line-->
+
+    <TextView
+        android:id="@+id/balanceCoin"
+        style="@style/Subhead2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="11.5dp"
+        android:textColor="?BallanceCoinAmountColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/border"
+        tools:text="0.000078 BTC" />
+
+    <TextView
+        android:id="@+id/balanceFiat"
+        style="@style/Headline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8.5dp"
+        android:layout_marginEnd="12dp"
+        android:textColor="?ColorJacob"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/border"
+        tools:text="$52.50" />
+
+    <View
+        android:id="@+id/collapsedBottom"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/red_d"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/balanceCoin" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/buttonsWrapper"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/collapsedBottom">
+
+        <!--  First Line  -->
+
+        <TextView
+            android:id="@+id/canSent"
+            style="@style/Subhead2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:drawableStart="@drawable/ic_outgoing_16"
+            android:drawablePadding="4dp"
+            android:includeFontPadding="false"
+            android:text="@string/Channels_CanSent"
+            android:textColor="@color/grey"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/canSentAmount"
+            style="@style/Subhead1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:includeFontPadding="false"
+            android:textColor="?ColorLeah"
+            app:layout_constraintBottom_toBottomOf="@+id/canSent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="$52.50" />
+
+        <!--  Second Line  -->
+
+        <TextView
+            android:id="@+id/canReceive"
+            style="@style/Subhead2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@drawable/ic_incoming_16"
+            android:drawablePadding="4dp"
+            android:drawableTint="@color/grey"
+            android:includeFontPadding="false"
+            android:text="@string/Channels_CanReceive"
+            android:textColor="@color/grey"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/canSent" />
+
+        <TextView
+            android:id="@+id/canReceiveAmount"
+            style="@style/Subhead1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:includeFontPadding="false"
+            android:textColor="?ColorLeah"
+            app:layout_constraintBottom_toBottomOf="@+id/canReceive"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="$52.50" />
+
+        <!--  Third Line  -->
+
+        <Button
+            android:id="@+id/buttonManage"
+            style="@style/ButtonPrimaryYellow"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="4dp"
+            android:text="@string/Channels_Manage"
+            app:layout_constraintEnd_toStartOf="@+id/buttonInfo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/canReceive" />
+
+        <Button
+            android:id="@+id/buttonInfo"
+            style="@style/ButtonPrimarySteel"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="4dp"
+            android:text="@string/Channels_Info"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonManage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/buttonManage" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,7 @@ class MainInteractor(private val lightningKit: LightningKit?) : MainModule.IInte
 
     var delegate: MainModule.IInteractorDelegate? = null
 
-    private var disposables = CompositeDisposable()
+    private val disposables = CompositeDisposable()
 
     override fun subscribeToStatus() {
         lightningKit
