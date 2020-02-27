@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
         android:includeFontPadding="false"
-        android:textColor="@color/grey"
+        android:textColor="?ColorRemus"
         app:layout_constraintStart_toStartOf="@+id/channelId"
         app:layout_constraintTop_toBottomOf="@+id/channelId"
         tools:text="Open" />

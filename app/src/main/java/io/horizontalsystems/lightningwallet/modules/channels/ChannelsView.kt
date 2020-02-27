@@ -4,9 +4,9 @@ import io.horizontalsystems.core.SingleLiveEvent
 
 class ChannelsView : ChannelsModule.IView {
 
-    val showChannels = SingleLiveEvent<List<ChannelViewItem>>()
+    val updateChannels = SingleLiveEvent<List<ChannelViewItem>>()
 
-    override fun show(viewItems: List<ChannelViewItem>) {
-        showChannels.postValue(viewItems)
+    override fun update(viewItems: List<ChannelViewItem>) {
+        updateChannels.postValue(viewItems)
     }
 }

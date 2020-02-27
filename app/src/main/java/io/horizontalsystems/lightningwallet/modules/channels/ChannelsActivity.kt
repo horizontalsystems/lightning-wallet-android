@@ -44,7 +44,7 @@ class ChannelsActivity : AppCompatActivity(), ChannelsAdapter.Listener {
     private fun observeEvents() {
         val view = presenter.view as ChannelsView
 
-        view.showChannels.observe(this, Observer {
+        view.updateChannels.observe(this, Observer {
             channelsAdapter.setItems(it)
         })
     }
@@ -68,6 +68,7 @@ class ChannelsActivity : AppCompatActivity(), ChannelsAdapter.Listener {
     //  ChannelsAdapter.Listener
 
     override fun onItemClick(item: ChannelViewItem) {
+        presenter.onSelectItem(item)
     }
 
     override fun onClickInfo(item: ChannelViewItem) {

@@ -11,7 +11,7 @@ import io.horizontalsystems.lightningwallet.App
 object ChannelsModule {
 
     interface IView {
-        fun show(viewItems: List<ChannelViewItem>)
+        fun update(viewItems: List<ChannelViewItem>)
     }
 
     interface IRouter {
@@ -20,6 +20,7 @@ object ChannelsModule {
 
     interface IViewDelegate {
         fun onLoad()
+        fun onSelectItem(item: ChannelViewItem)
         fun onNewChannel()
         fun onSelectOpen()
         fun onSelectClosed()
@@ -52,42 +53,13 @@ object ChannelsModule {
             val view = ChannelsView()
             val router = ChannelsRouter()
             val interactor = ChannelsInteractor(App.lightningKitManager.currentKit)
+            val factory = ChannelViewItemFactory()
 
-            val presenter = ChannelsPresenter(view, router, interactor).apply {
+            val presenter = ChannelsPresenter(view, router, interactor, factory).apply {
                 interactor.delegate = this
             }
 
             return presenter as T
         }
-    }
-}
-
-class ChannelViewItem(val state: State, val remotePubKey: String, val localBalance: Int, val remoteBalance: Int) {
-    enum class State {
-        open,
-        pendingOpen,
-        pendingClosing,
-        pendingForceClosing,
-        waitingClose
-    }
-}
-
-class ChannelsViewItemFactory {
-    fun viewItem(channel: Channel): ChannelViewItem {
-        return ChannelViewItem(
-                state = ChannelViewItem.State.open,
-                remotePubKey = channel.remotePubkey,
-                localBalance = channel.localBalance.toInt(),
-                remoteBalance = channel.remoteBalance.toInt()
-        )
-    }
-
-    fun viewItem(state: ChannelViewItem.State, pendingChannel: PendingChannelsResponse.PendingChannel): ChannelViewItem {
-        return ChannelViewItem(
-                state = state,
-                remotePubKey = pendingChannel.remoteNodePub,
-                localBalance = pendingChannel.localBalance.toInt(),
-                remoteBalance = pendingChannel.remoteBalance.toInt()
-        )
     }
 }

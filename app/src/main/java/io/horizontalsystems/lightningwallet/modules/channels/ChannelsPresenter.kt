@@ -4,12 +4,16 @@ import androidx.lifecycle.ViewModel
 import com.github.lightningnetwork.lnd.lnrpc.Channel
 import com.github.lightningnetwork.lnd.lnrpc.PendingChannelsResponse
 import com.github.lightningnetwork.lnd.lnrpc.PendingChannelsResponse.*
+import io.horizontalsystems.lightningwallet.modules.channels.ChannelViewItem.UpdateType
 
 class ChannelsPresenter(
         val view: ChannelsModule.IView,
         val router: ChannelsModule.IRouter,
-        private val interactor: ChannelsModule.IInteractor)
+        private val interactor: ChannelsModule.IInteractor,
+        private val factory: ChannelViewItemFactory)
     : ChannelsModule.IViewDelegate, ChannelsModule.IInteractorDelegate, ViewModel() {
+
+    private var viewItems = mutableListOf<ChannelViewItem>()
 
     private var openChannels = listOf<Channel>()
     private var pendingOpenChannels = listOf<PendingOpenChannel>()
@@ -20,6 +24,26 @@ class ChannelsPresenter(
     override fun onLoad() {
         interactor.fetchOpenChannels()
         interactor.fetchPendingChannels()
+    }
+
+    override fun onSelectItem(item: ChannelViewItem) {
+        for (viewItem in viewItems) {
+            if (viewItem.remotePubKey == item.remotePubKey) {
+                viewItem.updateType = UpdateType.EXPAND
+                viewItem.expanded = !viewItem.expanded
+
+                continue
+            }
+
+            if (viewItem.expanded) {
+                viewItem.apply {
+                    expanded = false
+                    updateType = UpdateType.EXPAND
+                }
+            }
+        }
+
+        view.update(viewItems.map { it.copy() })
     }
 
     override fun onNewChannel() {
@@ -54,8 +78,6 @@ class ChannelsPresenter(
 
     private fun syncView() {
 
-        val factory = ChannelsViewItemFactory()
-
         val openChannelViewItems = openChannels.map {
             factory.viewItem(it)
         }
@@ -72,8 +94,9 @@ class ChannelsPresenter(
             factory.viewItem(ChannelViewItem.State.waitingClose, it.channel)
         }
 
-        view.show(openChannelViewItems + pendingOpenChannelViewItems + pendingClosingChannelViewItems + pendingForceClosingChannelViewItems + waitingCloseChannelViewItems)
+        viewItems = (openChannelViewItems + pendingOpenChannelViewItems + pendingClosingChannelViewItems + pendingForceClosingChannelViewItems + waitingCloseChannelViewItems).toMutableList()
 
+        view.update(viewItems)
     }
 
     //  ViewModel

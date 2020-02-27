@@ -52,7 +52,7 @@ dependencies {
     implementation "androidx.biometric:biometric:1.0.1"
     implementation 'com.google.code.gson:gson:2.8.6'
 
-    def modulesVersion = '6da2b10'
+    def modulesVersion = '41b4e47'
 
     implementation "com.github.horizontalsystems.unstoppable-wallet-android:core:$modulesVersion"
     implementation "com.github.horizontalsystems.unstoppable-wallet-android:views:$modulesVersion"
