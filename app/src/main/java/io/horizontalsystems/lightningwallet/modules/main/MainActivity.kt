@@ -31,7 +31,7 @@ class MainActivity : BaseActivity() {
         val view = presenter.view as MainView
 
         view.showBalance.observe(this, Observer {
-            totalBalance.text = "$it sat"
+            totalBalance.text = "$it.0 sat"
         })
 
         view.showSyncingText.observe(this, Observer {
